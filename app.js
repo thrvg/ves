@@ -188,7 +188,7 @@ cModel.find(function(err, allofthedata){
 
 
 app.get("/", function(req, res){
-  res.render("temp");
+  return res.render("temp");
 
 });
 app.get("/letsvote", function(req, res){
@@ -207,7 +207,7 @@ app.get("/election", function(req, res){
 return res.render("login");
 });
 app.get("/addcandidate", function(req, res){
-  res.render("addcandidate");
+  return res.render("addcandidate");
 });
 
 
@@ -304,7 +304,7 @@ app.post("/addcandidate", function(req, res){
   }});
   //console.log(person);
   //
-  res.redirect("/addcandidate");
+  return res.redirect("/addcandidate");
 
 });
 
@@ -325,7 +325,7 @@ app.post("/addcandidate", function(req, res){
            }
        }
    );
-res.redirect("/removecandidate");
+return res.redirect("/removecandidate");
  });
 
 
@@ -354,7 +354,7 @@ function getstuff(astring){
 }
 
 app.get("/candidates", function(req, res){
-  res.render("candidates", { typelist: typelist});
+  return res.render("candidates", { typelist: typelist});
 
 });
 app.post("/vote", function(req, res){
@@ -377,15 +377,28 @@ app.post("/vote", function(req, res){
     }
     else{
       let stringtocut = req.body.textarea1;
-      console.log(stringtocut);
+      let firstparts = {};
+
       let stringstart = stringtocut.indexOf('!');
       stringtocut = stringtocut.substr(1, stringtocut.length);
+
+        console.log(stringtocut);
+      let counter=0;
       while(stringtocut.indexOf('!')!=-1){
+        counter+=1;
         firstpart = stringtocut.substr(0, stringtocut.indexOf('!'));
         secondpart = stringtocut.substr(stringtocut.indexOf('!')+1, stringtocut.length);
         // console.log(firstpart);
         stringtocut=secondpart;
-
+        if(!(firstpart in firstparts)){
+        firstparts[firstpart]=counter;
+      }
+      else{
+        return res.render("somethingswrong");
+      }
+      if(counter>=7){
+        return res.render("somethingswrong")
+      }
         allofthedata.forEach(function(element){
           if(_.lowerCase(element.type)===_.lowerCase(firstpart.substr(0,firstpart.indexOf(":")))){
             element.cdata.forEach(function(subelement){
@@ -411,14 +424,14 @@ app.post("/vote", function(req, res){
         });
 
       }
-      res.redirect("aftervoting");
+      return res.redirect("aftervoting");
     }
   });
   //res.redirect("aftervoting");
 });
 app.get("/aftervoting", function(req, res){
   //req.body.textarea1);
-  res.render("aftervoting");
+  return res.render("aftervoting");
   //console.log(req.user.hasVoted);
 });
 app.get("/vote", function(req, res){
@@ -457,7 +470,7 @@ else{
 
     });
 console.log(election_choices);
-res.render("vote",{choices: election_choices});
+return res.render("vote",{choices: election_choices});
 
   }
   });
@@ -485,7 +498,7 @@ app.get("/candidates/:category/:cname", function(req, res){
               found =1;
 
               //res.render("description")
-              res.render("description", {ptype:element.type, pname: subelement.name, pdesc: subelement.desc, pcomp: subelement.comp, pimg: subelement.imgurl, typelist: typelist});
+              return res.render("description", {ptype:element.type, pname: subelement.name, pdesc: subelement.desc, pcomp: subelement.comp, pimg: subelement.imgurl, typelist: typelist});
              }
           });
 
@@ -494,7 +507,7 @@ app.get("/candidates/:category/:cname", function(req, res){
         }
       });
       if(found===0){
-        res.render("oops", {pt: "We're sorry", pc: "There is no candidate with that title/name.", typelist: typelist});
+        return res.render("oops", {pt: "We're sorry", pc: "There is no candidate with that title/name.", typelist: typelist});
       }
     }
 
@@ -506,7 +519,7 @@ app.get("/removecandidate", function(req, res){
       console.log(err);
     }
     else{
-      res.render("removecandidate", {data: allofthedata});
+      return res.render("removecandidate", {data: allofthedata});
     }
   });
 });
@@ -516,7 +529,7 @@ app.get("/removecandidate", function(req, res){
 // });
 app.post("/letsvote", function(req, res){
   special_string=req.body.grouptype;
-  res.redirect("vote");
+  return res.redirect("vote");
 });
 
 app.get("/candidates/:category", function(req, res){
@@ -533,11 +546,11 @@ app.get("/candidates/:category", function(req, res){
         found=1;
 
 
-        res.render("categories", {data: element.cdata, type: element.type, typelist: typelist});
+        return res.render("categories", {data: element.cdata, type: element.type, typelist: typelist});
       }
     });
     if(found===0){
-      res.render("oops", {pt: "We're sorry", pc: "There is no candidate with that title/name.", typelist: typelist});
+      return res.render("oops", {pt: "We're sorry", pc: "There is no candidate with that title/name.", typelist: typelist});
     }
   }
   });
@@ -593,15 +606,8 @@ app.get("/candidates/:category", function(req, res){
 //   });
 // });
 app.get("/register?", function(req,res){
-  var currentusers=[];
-  User.find(function(err, cu){
-    if(err){
-      console.log(err);
-    }
-      currentusers=cu;
-  });
+
   let found=0;
-  let registered=0;
   inputModel.find(function(e, validusers){
     if(e){
       console.log(e);
@@ -612,20 +618,11 @@ app.get("/register?", function(req,res){
           let element = validusers[i];
           found=1;
 
-          for(var j = 0; j<currentusers.length; j++){
 
-                if(element.email===currentusers[j].email){
 
-                   registered=1;
-                   found=1;
-                   return res.render("alreadyregistered");
-                }
 
-            }
-            if(registered===0){
+            return res.render("registration", {username: element.email, name: element.name, email: element.email, grno: element.grno, house: element.house});
 
-            res.render("registration", {username: element.email, name: element.name, email: element.email, grno: element.grno, house: element.house});
-          }
 
 
 
@@ -636,7 +633,7 @@ app.get("/register?", function(req,res){
 
             if(found===0){
               console.log("Found:"+found);
-              res.render("wronglink");
+              return res.render("wronglink");
             }
     });
 
@@ -644,37 +641,57 @@ app.get("/register?", function(req,res){
 });
  app.get("/alreadyregistered", function(req, res){
 
-   res.render("alreadyregistered");
+   return res.render("alreadyregistered");
 
    }
  );
 
 app.post("/register", function(req, res){
-
-  User.register({username: req.body.username, name: req.body.name, email: req.body.email, grno: req.body.grno, house: req.body.house, hasVoted: false}, req.body.password, function(err, user){
-    if (err) {
+  let registered=0;
+  User.find(function(err, currentusers){
+    if(err){
       console.log(err);
-      res.redirect("/register");
+    }
+    for(var j = 0; j<currentusers.length; j++){
 
-    }
-    else{
-    //  passport.authenticate("local")(req, res, function(){
-        res.redirect("success");
-      //});
-    }
-  }
-);
+          if(req.body.username===currentusers[j].username){
+
+             registered=1;
+
+             return res.render("alreadyregistered");
+          }
+
+      }
+      if(registered===0){
+      User.register({username: req.body.username, name: req.body.name, email: req.body.email, grno: req.body.grno, house: req.body.house, hasVoted: false}, req.body.password, function(err, user){
+        if (err) {
+          console.log(err);
+          return res.render("somethingswrong");
+
+        }
+        else{
+        //  passport.authenticate("local")(req, res, function(){
+            return res.redirect("success");
+          //});
+        }
+      }
+    );
+}
+  });
+
+
+
 
 });
 
 app.get("/login", function(req, res){
 
-  res.render("login");
+  return res.render("login");
   }
 );
 app.get("/failedlogin", function(req, res){
 
-  res.render("failedlogin");
+  return res.render("failedlogin");
   }
 );
 app.post('/login', function(req, res, next) {
@@ -726,7 +743,7 @@ app.get("/success", function(req, res){
     console.log(req.user);
   }
 
-  res.render("success");
+  return res.render("success");
   }
 );
 
