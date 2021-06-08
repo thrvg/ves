@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html style="background-color:#1bc0b0; lang="en">
+<%- include("partials/sheader-part");-%>
+
+<form action="/login" method="post">
+  <div class="background-box">
+
+  <div class="form-group extra-pad align-center white-color">
+
+<h1 class="normal-font move-up-on-start align-center">Please login to continue</h1>
+<div class="row justify-content-center">
+<div class="col-md-4">
+<label class="top-margin normal-font">Username</label>
+<input class="form-control normal-font" type="text" name="username" size="20" placeholder="Your username"></input>
+<label class="top-margin normal-font">Password</label>
+<input class="form-control normal-font" type="password" name="password" placeholder="Your password"></input>
+</div>
+</div>
+<div class="text-center">
+<button class="btn2 normal-font register top-margin-s" type="submit"><p class="submit-padded">Login</p></button>
+</div>
+</div>
+</form>
+
+<div class="div-size"></div>
+<p class="align-center white-color"> Haven't registered? Check your email for a link! </p>
+
+
+
+</div>
+</div>
+<%- include("partials/footer");-%>

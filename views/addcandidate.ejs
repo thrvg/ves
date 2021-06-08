@@ -1,0 +1,84 @@
+<%- include("partials/sheader");-%>
+
+<form action="/addcandidate" method="post">
+  <div class="form-group extra-pad">
+<h1 class="normal-font ballot-title move-up-on-start align-center">Add Candidate</h1>
+<div class="row justify-content-center">
+<div class="col-md-8">
+<label class="top-margin normal-font align-center">Name</label>
+<input class="form-control normal-font" type="text" name="candidateName" placeholder="Your name"></input>
+<label class="top-margin normal-font align-center">Video URL</label>
+<input class="form-control normal-font" type="text" name="candidateImg" placeholder="A link to your video on YouTube"></input>
+<label class="top-margin normal-font align-center">Competing for</label>
+ <select class="form-control normal-font" name="candidateComp">
+   <option>Head Prefect Boy</option>
+   <option>Head Prefect Girl</option>
+   <option>Sports Prefect Boy</option>
+   <option>Sports Prefect Girl</option>
+   <option>Jaguar House Captain</option>
+   <option>Jaguar House Vice-Captain</option>
+   <option>Cheetah House Captain</option>
+   <option>Cheetah House Vice-Captain</option>
+   <option>Puma House Captain</option>
+   <option>Puma House Vice-Captain</option>
+   <option>Sher House Captain</option>
+   <option>Sher House Vice-Captain</option>
+ </select>
+
+
+ <label class="top-margin normal-font align-center">Also competing for (the second post you are running for, if applicable)</label>
+  <select class="form-control normal-font" name="candidateComp2">
+    <option>Not Applicable</option>
+    <option>Head Prefect Boy</option>
+    <option>Head Prefect Girl</option>
+    <option>Sports Prefect Boy</option>
+    <option>Sports Prefect Girl</option>
+    <option>Jaguar House Captain</option>
+    <option>Jaguar House Vice-Captain</option>
+    <option>Cheetah House Captain</option>
+    <option>Cheetah House Vice-Captain</option>
+    <option>Puma House Captain</option>
+    <option>Puma House Vice-Captain</option>
+    <option>Sher House Captain</option>
+    <option>Sher House Vice-Captain</option>
+  </select>
+
+  <label class="top-margin normal-font align-center">Also competing for (the third post you are running for, if applicable) </label>
+   <select class="form-control normal-font" name="candidateComp3">
+     <option>Not Applicable</option>
+     <option>Head Prefect Boy</option>
+     <option>Head Prefect Girl</option>
+     <option>Sports Prefect Boy</option>
+     <option>Sports Prefect Girl</option>
+     <option>Jaguar House Captain</option>
+     <option>Jaguar House Vice-Captain</option>
+     <option>Cheetah House Captain</option>
+     <option>Cheetah House Vice-Captain</option>
+     <option>Puma House Captain</option>
+     <option>Puma House Vice-Captain</option>
+     <option>Sher House Captain</option>
+     <option>Sher House Vice-Captain</option>
+   </select>
+
+   <label class="top-margin normal-font align-center">Description (optional) </label>
+   <textarea class="form-control normal-font" rows="5" cols="40"name="candidateDesc" placeholder="Anything else you would like to tell your voters. This will be displayed below your name and the post you are running for."></textarea>
+
+
+
+   <div class="text-center">
+
+<button class="btn1 normal-font" type="submit"><p class="submit-padded">Submit</p></button>
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<div class="container-fluid col-md-8 extra-top-margin normal-font">
+    <h2 class="color-green">Instructions for entering 'Video URL'</h2>
+    <li>Step 1: Upload a short (about 30-second) video on Youtube. </li>
+    <li>Step 2: After uploading the video, press 'Share', select 'Embed', and copy the link in double quotes AFTER the words 'src='. Do NOT copy the quotation marks.</li>
+    <li>Step 3: Paste the link in the textbox. It should look similar to https://www.youtube.com/embed/fJ9rUzIMcZQ. Ensure the word 'embed' is present in your link.</li>
+</div>
+<div class="div-size"></div>
+<%- include("partials/footer");-%>

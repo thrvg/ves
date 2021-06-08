@@ -1,0 +1,49 @@
+<%- include("partials/sheader");-%>
+<!-- <div class="container extra-pad normal-font"> -->
+  <form action="/removecandidate" method="post">
+  <div class="form-group extra-pad">
+
+<h1 class="ballot-title normal-font move-up-on-start align-center">Remove Candidate</h1>
+<div class="row justify-content-center">
+<div class="col-md-8">
+<label class="normal-font align-center">Name</label>
+<input class="form-control normal-font" type="text" name="candidateNameR" placeholder="Name of the candidate"></input>
+<label class="top-margin normal-font align-center">Competing for</label>
+ <select class="form-control normal-font" name="candidateCompR">
+   <option>Head Prefect Boy</option>
+   <option>Head Prefect Girl</option>
+   <option>Sports Prefect Boy</option>
+   <option>Sports Prefect Girl</option>
+   <option>Jaguar House Captain</option>
+   <option>Jaguar House Vice-Captain</option>
+   <option>Cheetah House Captain</option>
+   <option>Cheetah House Vice-Captain</option>
+   <option>Puma House Captain</option>
+   <option>Puma House Vice-Captain</option>
+   <option>Sher House Captain</option>
+   <option>Sher House Vice-Captain</option>
+ </select>
+<div class="text-center">
+<button class="btn1 normal-font" type="submit"><p class="top-margin-only">Remove</p></button>
+</div>
+<label class="top-margin-s">* if the candidate list does not change after pressing 'Remove', please check your spelling/option selection.</label>
+</div>
+</div>
+</form>
+<div class="row justify-content-center">
+<div class="col-md-8">
+<h1 class="color-green move-up-on-start normal-font align-center">Candidate list</h1>
+<%data.forEach(function(element){%>
+    <%element.cdata.forEach(function(subelement){%>
+
+        <h4 class="align-center"><%=subelement.name%>, <%=subelement.comp%></h4>
+
+    <%});%>
+
+<%});%>
+
+
+</div>
+</div>
+<div class="div-size"></div>
+<%- include("partials/footer");-%>

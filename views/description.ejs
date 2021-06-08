@@ -1,0 +1,23 @@
+<%- include("partials/header");-%>
+<div class="slider-down"></div>
+<div class="container extra-pad normal-font">
+
+<div class="iframe-container">
+  <iframe src="<%-pimg%>"></iframe>
+  </div>
+    <!-- <img class="profile-pic" src="<%-pimg%>"> -->
+    <h1 class="move-up-on-start color-green"><%= pname%></h1>
+    <h4 class="move-up-on-start move-down">Running for <%= pcomp%></h4>
+    <p><%= pdesc%></p>
+    <% let urlpath = "/candidates/"+ptype;%>
+    <button class="btn1 normal-font" type="submit"><p class="submit-padded"><a class="no-format" href="<%-urlpath%>">Back</a></p></button>
+
+</div>
+<div class="div-size"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineMax.min.js" integrity="sha512-lJDBw/vKlGO8aIZB8/6CY4lV+EMAL3qzViHid6wXjH/uDrqUl+uvfCROHXAEL0T/bgdAQHSuE68vRlcFHUdrUw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js" integrity="sha512-8Wy4KH0O+AuzjMm1w5QfZ5j5/y8Q/kcUktK9mPUVaUoBvh3QPUZB822W/vy7ULqri3yR8daH3F58+Y8Z08qzeg==" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/JS/sanimated.js" charset="utf-8"></script>
+<%- include("partials/footer");-%>
