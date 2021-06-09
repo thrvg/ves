@@ -235,9 +235,11 @@ app.post("/addcandidate", function(req, res){
               { $push: {cdata: person} },
               function (error, success) {
         if (error) {
-            console.log(error);
+            //console.log(error);
+            return res.render("somethingswrong");
         } else {
-            console.log(success);
+            return res.render("successadded");
+            //console.log(success);
         }
     }
           );
@@ -304,7 +306,7 @@ app.post("/addcandidate", function(req, res){
   }});
   //console.log(person);
   //
-  return res.redirect("/addcandidate");
+
 
 });
 
@@ -514,19 +516,21 @@ app.get("/candidates/:category/:cname", function(req, res){
   });
 });
 app.get("/removecandidate", function(req, res){
-  cModel.find(function(err, allofthedata){
-    if(err){
-      console.log(err);
-    }
-    else{
-      return res.render("removecandidate", {data: allofthedata});
-    }
-  });
-});
+
+ return res.render("wronglink");
+  // cModel.find(function(err, allofthedata){
+  //   if(err){
+  //     console.log(err);
+  //   }
+  //   else{
+  //     return res.render("removecandidate", {data: allofthedata});
+  //   }
+  // });
+ });
 // app.get("/register?", function(req, res){
 //   res.render("alreadyregistered");
 //   console.log(req.query.q);
-// });
+//});
 app.post("/letsvote", function(req, res){
   special_string=req.body.grouptype;
   return res.redirect("vote");
@@ -696,7 +700,7 @@ app.get("/failedlogin", function(req, res){
 );
 app.post('/login', function(req, res, next) {
   if(req.isAuthenticated()){
-      return res.render("wronglink");
+      return res.render("alreadyloggedin");
   }
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
