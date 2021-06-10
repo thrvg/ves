@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 //app.use(express.static(process.env.PWD + '/public'));
 //app.use('/static', express.static('public'))
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 //app.use('/static', express.static(path.join(__dirname, 'public')));
 
 var allowed={"Jaguar":{"Jaguar House Captain":1, "Jaguar House Vice-Captain":2, "Head Prefect Boy":3, "Head Prefect Girl":4, "Sports Prefect Boy":5, "Sports Prefect Girl":6},
