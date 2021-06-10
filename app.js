@@ -11,7 +11,7 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const path = require('path');
-
+process.env.PWD = process.cwd();
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 //app.use(express.static("public"));
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(process.env.PWD + '/public'));
 //app.use('/static', express.static('public'))
 //app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/static', express.static(path.join(__dirname, 'public')));
