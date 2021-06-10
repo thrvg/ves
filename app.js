@@ -17,7 +17,8 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+//app.use(express.static("public"));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 var allowed={"Jaguar":{"Jaguar House Captain":1, "Jaguar House Vice-Captain":2, "Head Prefect Boy":3, "Head Prefect Girl":4, "Sports Prefect Boy":5, "Sports Prefect Girl":6},
               "Cheetah":{"Cheetah House Captain":1, "Cheetah House Vice-Captain":2, "Head Prefect Boy":3, "Head Prefect Girl":4, "Sports Prefect Boy":5, "Sports Prefect Girl":6},
