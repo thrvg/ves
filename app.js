@@ -34,7 +34,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/cDB", {'useNewUrlParser': true, 'useUnifiedTopology': true});
+mongoose.connect("mongodb+srv://admin-ves:VVSadmin!123@cluster0.v9zcs.mongodb.net/cDB", {'useNewUrlParser': true, 'useUnifiedTopology': true});
 //mongoose.connect("mongodb://localhost:27017/userDB", {'useNewUrlParser': true, 'useUnifiedTopology': true});
 mongoose.set("useCreateIndex", true);
 
@@ -81,19 +81,19 @@ const cSchema = {
   const inputModel = mongoose.model("inputData", inputSchema);
 
   const newuser1 = new inputModel({
-    name: "Amy Santiago",
+    name: "Test User",
     grno: 1122,
-    email: "as@email.com",
-    house: "Puma",
-    specialtoken: "as1122"
+    email: "test@email.com",
+    house: "Jaguar",
+    specialtoken: "test1122"
 
   });
   const newuser2 = new inputModel({
-    name: "Jake Peralta",
+    name: "Another User",
     grno: 1123,
-    email: "jp@email.com",
-    house: "Jaguar",
-    specialtoken: "jp1123"
+    email: "another@email.com",
+    house: "Puma",
+    specialtoken: "another1123"
 
   });
 
@@ -212,12 +212,13 @@ app.get("/addcandidate", function(req, res){
 
 
 app.post("/addcandidate", function(req, res){
+
   cModel.find(function(err, allofthedata){
     if(err){
       console.log(err);
     }
     else{
-
+      //console.log(allofthedata);
 
     for(var i=0; i<allofthedata.length; i++){
       if(_.lowerCase(allofthedata[i].type)===_.lowerCase(req.body.candidateComp)){
@@ -236,6 +237,8 @@ app.post("/addcandidate", function(req, res){
               function (error, success) {
         if (error) {
             //console.log(error);
+            console.log("Here");
+
             return res.render("somethingswrong");
         } else {
             return res.render("successadded");
@@ -366,7 +369,7 @@ app.post("/vote", function(req, res){
         if (result) {
              result.hasVoted = true;
              result.save()
-            console.log("found")
+            //console.log("found")
         } else {
             console.log("not found")
         }
@@ -455,7 +458,7 @@ else{
     special_string=req.user.house;
     let allowedelections = allowed[special_string];
 
-    console.log(allowed);
+    //console.log(allowed);
     allofthedata.forEach(function(element){
 
 
@@ -636,7 +639,7 @@ app.get("/register?", function(req,res){
       }
 
             if(found===0){
-              console.log("Found:"+found);
+              //console.log("Found:"+found);
               return res.render("wronglink");
             }
     });
@@ -751,6 +754,6 @@ app.get("/success", function(req, res){
   }
 );
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");
 });
