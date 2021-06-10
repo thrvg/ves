@@ -10,7 +10,7 @@ const _ = require("lodash");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-// const path = require('path');
+const path = require('path');
 // process.env.PWD = process.cwd();
 
 const app = express();
