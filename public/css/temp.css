@@ -1,0 +1,9 @@
+.slider{
+  height:100vh;
+  width: 100vw;
+  position: absolute;
+  top:100vh;
+  left:0;
+  background-color: #1bc0b0;
+  z-index: 1;
+}
