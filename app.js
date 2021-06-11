@@ -65,6 +65,7 @@ passport.deserializeUser(User.deserializeUser());
 
 const cSchema = {
   type: String,
+  sort_id: Number,
   cdata: [{
     name: String,
     comp: String,
@@ -106,50 +107,62 @@ const cSchema = {
 //
 const cRaceJHC = new cModel({
   type: "Jaguar House Captain",
+  sort_id: 5,
   cdata: []
 });
 const cRaceJHVC = new cModel({
   type: "Jaguar House Vice-Captain",
+  sort_id: 6,
   cdata: []
 });
 const cRaceCHC = new cModel({
   type: "Cheetah House Captain",
+  sort_id: 7,
   cdata: []
 });
 const cRaceCHVC = new cModel({
   type: "Cheetah House Vice-Captain",
+  sort_id: 8,
   cdata: []
 });
 const cRaceSHC = new cModel({
   type: "Sher House Captain",
+  sort_id: 9,
   cdata: []
 });
 const cRaceSHVC = new cModel({
   type: "Sher House Vice-Captain",
+  sort_id: 10,
   cdata: []
 });
 const cRacePHC = new cModel({
   type: "Puma House Captain",
+  sort_id: 11,
   cdata: []
 });
 const cRacePHVC = new cModel({
   type: "Puma House Vice-Captain",
+  sort_id: 12,
   cdata: []
 });
 const cRaceHPB = new cModel({
   type: "Head Prefect Boy",
+  sort_id: 1,
   cdata: []
 });
 const cRaceHPG = new cModel({
   type: "Head Prefect Girl",
+  sort_id: 2,
   cdata: []
 });
 const cRaceSPB = new cModel({
   type: "Sports Prefect Boy",
+  sort_id: 3,
   cdata: []
 });
 const cRaceSPG = new cModel({
   type: "Sports Prefect Girl",
+  sort_id: 4,
   cdata: []
 });
 
@@ -161,9 +174,9 @@ const cRaceHP = new cModel({
 });
 //const cTempArray = [cRaceHPB, cRaceHPG]
 //cModel.collection.drop();
-//const cTempArray = [cRaceHPB, cRaceHPG, cRaceSPB, cRaceSPG, cRaceJHC, cRaceJHVC, cRaceCHC, cRaceCHVC, cRacePHC, cRacePHVC, cRaceSHC, cRaceSHVC];
-const cTempArray = [newuser1, newuser2];
-// inputModel.insertMany(cTempArray, function(err){
+const cTempArray = [cRaceHPB, cRaceHPG, cRaceSPB, cRaceSPG, cRaceJHC, cRaceJHVC, cRaceCHC, cRaceCHVC, cRacePHC, cRacePHVC, cRaceSHC, cRaceSHVC];
+//const cTempArray = [newuser1, newuser2];
+// cModel.insertMany(cTempArray, function(err){
 //   if(err){
 //     console.log(err);
 //   }
@@ -171,7 +184,7 @@ const cTempArray = [newuser1, newuser2];
 //     console.log("S");
 //   }
 // });
-// User.deleteMany({}, function(err){
+// cModel.deleteMany({}, function(err){
 //   if(err){
 //     console.log(err);
 //   }
@@ -180,7 +193,7 @@ const cTempArray = [newuser1, newuser2];
 //   }
 // });
 var typelist=[]
-cModel.find(function(err, allofthedata){
+cModel.find({}).sort({"sort_id": 1}).exec(function(err, allofthedata) {
   if(err){
     console.log(err);
   }
@@ -189,7 +202,17 @@ cModel.find(function(err, allofthedata){
       typelist.push(element.type);
     });
   }
-});
+ });
+// cModel.find(function(err, allofthedata){
+//   if(err){
+//     console.log(err);
+//   }
+//   else{
+//     allofthedata.forEach(function(element){
+//       typelist.push(element.type);
+//     });
+//   }
+// });
 
 
 
@@ -210,7 +233,9 @@ app.get("/election", function(req, res){
   if(req.isAuthenticated()){
   return res.render("index");
 }
+else{
 return res.render("login");
+}
 });
 app.get("/addcandidate", function(req, res){
   return res.render("addcandidate");

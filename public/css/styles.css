@@ -260,6 +260,11 @@ border-color: white;
   color: white;
   font-size: 1.8rem;
 }
+.fas.black-color{
+  color: black;
+  font-size: 1rem;
+  
+}
 .white-color{
   color: white;
 }
