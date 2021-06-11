@@ -28,7 +28,7 @@ const btnv = $("#btn-vt");
    }, 1000);
    setTimeout(function() {
 
-     slider.css("display", "none");
+     //slider.css("display", "none");
 
  }, 1100);
   });
@@ -43,7 +43,7 @@ const btnv = $("#btn-vt");
    }, 1000);
    setTimeout(function() {
 
-     slider.css("display", "none");
+     //slider.css("display", "none");
 
  }, 1100);
 
